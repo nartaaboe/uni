@@ -3,6 +3,7 @@ package Users ;
 import Contents.Lesson;
 import Contents.Mark;
 import Contents.Pair;
+import Database.Data;
 import Enums.*;
 import Message.Order;
 import Message.Request;
@@ -462,11 +463,18 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	 */
 	public void sendComplaint() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Enter student's name: ");
 		String name = bf.readLine();
 		for(List<Student> lst : courseWithStudents.values()){
 			for(Student student : lst){
 				if(student.getUsername().equals(name)){
-
+					for(User user : Data.getInstance().getUsers()){
+						if(user instanceof Dean && ((Dean) user).getFaculty().equals(student.getFaculty())){
+							((Dean) user).getReceivedComplaints().add(createOrder(student));
+							break;
+						}
+					}
+					break;
 				}
 			}
 		}
@@ -479,9 +487,6 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	 * @param to the employee to whom the request is being sent
 	 * @param request the Request object
 	 */
-	public void sendRequest(Employee to, Request request) {
-	}
-
 	/**
 	 * Implements the research-related methods from the Researcher interface.
 	 */

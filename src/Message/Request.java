@@ -10,9 +10,10 @@ import java.nio.CharBuffer;
  * This class represents a request within the system, encapsulating its description and the employee who sent it.
  */
 public class Request implements Readable, Serializable {
-
+	private String title;
 	/**
 	 * The description of the request.
+	 *
 	 */
 	private String description;
 
@@ -33,7 +34,8 @@ public class Request implements Readable, Serializable {
 	 * @param description   The description of the request.
 	 * @param from          The employee who sent the request.
 	 */
-	public Request(String description, Employee from) {
+	public Request(String title, String description, Employee from) {
+		this.title = title;
 		this.description = description;
 		this.from = from;
 	}
@@ -45,7 +47,11 @@ public class Request implements Readable, Serializable {
 	 * @return The formatted request string.
 	 */
 	public String read() {
-		return from.toString() + '\n' + description;
+		return from.toString() + ": " + title + '\n' + description;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 	/**

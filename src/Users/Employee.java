@@ -1,9 +1,13 @@
 package Users ;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import Database.Data;
 import Enums.UserType;
 import Message.Message;
 import Message.Request;
@@ -84,10 +88,22 @@ public abstract class Employee extends User implements Serializable {
 	 * @param manager     The manager to whom the request is being sent.
 	 * @param request     The request to be sent.
 	 */
-	public void sendRequest(Manager manager, Request request) {
-
-		manager.getReceivedRequests().add(request);
+	private Request createRequest() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Enter title: ");
+		String title = bf.readLine();
+		System.out.println("Enter description: ");
+		String description = bf.readLine();
+		return new Request(title, description, this);
 	}
-	
+
+	public void sendRequest() throws IOException {
+		for(User user : Data.getInstance().getUsers()){
+			if(user instanceof Manager){
+				((Manager) user).getReceivedRequests().add(createRequest());
+			}
+		}
+	}
+
 }
 

@@ -272,6 +272,9 @@ public class Authorization {
             System.out.println("2 -> See info about students");
             System.out.println("3 -> See info about teachers");
             System.out.println("4 -> Assign course to teacher");
+            System.out.println("5 -> Assign course to student");
+            System.out.println("5 -> News");
+            System.out.println("6 -> View requests");
             System.out.println("5 -> Exit system");
             int n = Integer.parseInt(bf.readLine());
             switch (n){

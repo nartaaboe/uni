@@ -40,39 +40,26 @@ public class Dean extends Teacher implements Serializable {
 		super();
 	}
 
+	public Faculty getFaculty() {
+		return faculty;
+	}
+
+	public TeacherType getTitle() {
+		return title;
+	}
+
+	public Queue<Order> getReceivedComplaints() {
+		return receivedComplaints;
+	}
+
 	/**
 	 * Views an employee request.
 	 *
 	 * @param request The request to be viewed.
 	 */
-	public void viewEmployeeRequest(Request request) {
-		// TODO implement me	
+	public void manageReceivedOrder(){
+		Order order = receivedComplaints.poll();
+		System.out.println("Order -> " + order + '\n' + " closed.");
 	}
-
-	/**
-	 * Approves a student's registration.
-	 *
-	 * @param student The student whose registration is to be approved.
-	 */
-	public void approveStudentRegistration(Student student) {
-		// TODO implement me	
-	}
-
-	/**
-	 * Approves an employee request.
-	 *
-	 * @param request The request to be approved.
-	 */
-	public void approveEmployeeRequest(Request request) {
-		// TODO implement me	
-	}
-
-	/**
-	 * Assigns teachers to courses within the faculty.
-	 */
-	public void assignTeachersToCourses() {
-		// TODO implement me	
-	}
-	
 }
 
