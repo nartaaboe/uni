@@ -354,7 +354,7 @@ public class Authorization {
                     manager.viewInfoAboutTeachers();
                     break;
                 case 4:
-                    manager.assignCourse();
+                    //manager.assignCourse();
                     break;
                 case 5:
                     exitSystem = false;
