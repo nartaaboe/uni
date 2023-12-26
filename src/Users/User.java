@@ -1,15 +1,14 @@
 package Users ;
 
+import Contents.Course;
 import Contents.News;
 import Database.Data;
 import Enums.*;
 import Message.Comment;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -18,10 +17,18 @@ public abstract class User implements Serializable {
 	private String id;
 	private String password;
 	private String username;
-	private BufferedReader bf;
 
-	public User() {
-		new BufferedReader(new InputStreamReader(System.in));
+
+	private static final long serialVersionUID = 1L;
+
+	public static HashSet<User> users;
+
+	static {
+		users = loadUsers();
+	}
+
+	public User(){
+
 	}
 
 	public User(UserType userType, String id, String password, String username) {
@@ -29,7 +36,7 @@ public abstract class User implements Serializable {
 		this.id = id;
 		this.password = password;
 		this.username = username;
-		this.bf = new BufferedReader(new InputStreamReader(System.in));
+
 	}
 
 	public UserType getUserType() {
@@ -53,6 +60,7 @@ public abstract class User implements Serializable {
 	}
 
 	public void leaveCommentToNews() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		List<News> news = Data.getInstance().getNews();
 		int j = 0;
 		for(int i = news.size() - 1; i >= 0; i--)
@@ -62,6 +70,7 @@ public abstract class User implements Serializable {
 		System.out.println("Type your comment here: ");
 		String comment = bf.readLine();
 		Data.getInstance().getNews().get(n - 1).leaveComment(new Comment(this, new Date(), comment));
+		
 	}
 	public void setUserType(UserType userType) {
 		this.userType = userType;
@@ -84,15 +93,18 @@ public abstract class User implements Serializable {
 
 
 	public boolean verifyPassword() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter current password: ");
 		String p1 = bf.readLine();
 		if(p1.equals(password))
 			return true;
 		System.out.println("Wrong verification.");
+		
 		return false;
 	}
 
 	public void changePassword() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		verifyPassword();
 		System.out.println("Enter new password: ");
 		String newPassword = bf.readLine();
@@ -107,6 +119,7 @@ public abstract class User implements Serializable {
 
 		setPassword(newPassword);
 		System.out.println("Password is updated.");
+		
 	}
 
 
@@ -114,5 +127,27 @@ public abstract class User implements Serializable {
 		// TODO implement me
 		return false;
 	}
+
+
+	private static HashSet<User> loadUsers() {
+		File file = new File("db/users.ser");
+		if (file.exists()) {
+			try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+				return (HashSet<User>) ois.readObject();
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return new HashSet<>();
+	}
+
+	public static void saveUsers() throws Exception {
+		FileOutputStream fos = new FileOutputStream("db/users.ser");
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		oos.writeObject(users);
+		fos.close();
+		oos.close();
+	}
+
 }
 

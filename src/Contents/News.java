@@ -1,10 +1,10 @@
 package Contents;
 import Message.Comment;
+import Users.User;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Serializable;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -15,6 +15,11 @@ public class News implements Serializable {
 	private HashSet<Comment> comments;
 	private BufferedReader bf;
 
+	public static List<News> news;
+
+	static {
+		news = loadNews();
+	}
 	public News(){
 		bf = new BufferedReader(new InputStreamReader(System.in));
 	}
@@ -51,6 +56,26 @@ public class News implements Serializable {
 	public void leaveComment(Comment comment){
 		System.out.println("Successfully commented!");
 		comments.add(comment);
+	}
+
+	private static List<News> loadNews() {
+		File file = new File("db/news.ser");
+		if (file.exists()) {
+			try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+				return (List<News>) ois.readObject();
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return new ArrayList<>();
+	}
+
+	public static void saveNews() throws Exception {
+		FileOutputStream fos = new FileOutputStream("db/news.ser");
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		oos.writeObject(news);
+		fos.close();
+		oos.close();
 	}
 
 	public void viewComments(){

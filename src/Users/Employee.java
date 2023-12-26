@@ -9,6 +9,7 @@ import Message.Message;
 import Message.Request;
 
 public abstract class Employee extends User implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private double salary;
 	private List<Message> receivedMessages;
 	public Employee(){

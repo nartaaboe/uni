@@ -15,24 +15,23 @@ import Contents.News;
 import Message.Request;
 
 public class Manager extends Employee implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private ManagerType managerType;
 	private Faculty faculty;
-	private BufferedReader bf;
+
 	private List<Request> receivedRequests;
 	public Manager(){
-		bf = new BufferedReader(new InputStreamReader(System.in));
+
 		receivedRequests = new ArrayList<>();
 	}
 	public Manager(ManagerType managerType, Faculty faculty){
 		this.managerType = managerType;
 		this.faculty = faculty;
-		this.bf = new BufferedReader(new InputStreamReader(System.in));
 		this.receivedRequests = new ArrayList<>();
 	}
 	public Manager(ManagerType managerType, Faculty faculty, List<Request> receivedRequests){
 		this.managerType = managerType;
 		this.faculty = faculty;
-		this.bf = new BufferedReader(new InputStreamReader(System.in));
 		this.receivedRequests = receivedRequests;
 	}
 	public ManagerType getManagerType() {
