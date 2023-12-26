@@ -104,7 +104,7 @@ public abstract class User implements Serializable {
 
 	public void changePassword() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		verifyPassword();
+		if (!verifyPassword()) return;
 		System.out.println("Enter new password: ");
 		String newPassword = bf.readLine();
 
