@@ -12,28 +12,23 @@ public class SHA256 {
      * Generates a SHA-256 hash of the given string.
      *
      * @param str The input string to hash.
-     * @return The hexadecimal representation of the SHA-256 hash.
+     * @return The SHA-256 hash of string.
      */
     public static String getHash(String str) {
         try {
-            // Create a SHA-256 digest instance
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
-            // Perform the hashing
-            byte[] encodedhash = digest.digest(str.getBytes());
-
-            // Convert byte array into signum representation
-            StringBuilder hexString = new StringBuilder(2 * encodedhash.length);
-            for (byte b : encodedhash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) {
+            MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = sha256.digest(str.getBytes());
+            StringBuilder hexString = new StringBuilder(hashBytes.length * 2);
+            for (byte b : hashBytes) {
+                String s = Integer.toHexString(0xff & b);
+                if (s.length() == 1) {
                     hexString.append('0');
                 }
-                hexString.append(hex);
+                hexString.append(s);
             }
-            // Return the string in hexadecimal format
             return hexString.toString();
-        } catch (NoSuchAlgorithmException e) { // Catch block to handle the exception
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("SHA-256 algorithm not found", e);
         }
     }
