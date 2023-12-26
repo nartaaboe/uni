@@ -2,8 +2,9 @@ package Contents;
 
 import Enums.CourseType;
 import Enums.Faculty;
+import Users.User;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -15,6 +16,13 @@ public class Course implements Serializable {
 	private int credits;
 	private Faculty faculty;
 	private Mark mark;
+
+	public static HashSet<Course> courses;
+
+	static {
+		courses = loadCourses();
+	}
+
 	public Course() {
 
 	}
@@ -54,6 +62,28 @@ public class Course implements Serializable {
 	public Mark getMark(){
 		return mark;
 	}
+
+	private static HashSet<Course> loadCourses() {
+		File file = new File("db/courses.ser");
+		if (file.exists()) {
+			try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+				return (HashSet<Course>) ois.readObject();
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return new HashSet<>();
+	}
+
+	public static void saveCourses() throws Exception {
+		FileOutputStream fos = new FileOutputStream("db/courses.ser");
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		oos.writeObject(courses);
+		fos.close();
+		oos.close();
+	}
+
+
 	@Override
 	public String toString(){
 		return code + name + ", " + courseType;

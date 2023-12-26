@@ -91,6 +91,7 @@ public class Authorization {
             System.out.println("3 -> See transcript");
             System.out.println("4 -> Put attendance");
             System.out.println("5 -> News");
+
             System.out.println("6 -> Exit System");
             int n = Integer.parseInt(bf.readLine());
             switch (n){

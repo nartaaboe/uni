@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Queue;
 
 public class Dean extends Teacher implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private Faculty faculty;
 	private TeacherType title;
 	private Queue<Order>receivedComplaints;

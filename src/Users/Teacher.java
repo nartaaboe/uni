@@ -21,9 +21,10 @@ import Utils.CustomExceptions.CourseNotFound;
 import Utils.CustomExceptions.UserNotFound;
 
 public class Teacher extends Employee implements Researcher, Serializable {
+	private static final long serialVersionUID = 1L;
 	private TeacherType teacherTitle;
 	private HashMap<Course, List<Student>> courseWithStudents;
-	private BufferedReader bf;
+
 	private double rate;
 
 	public Teacher(){
@@ -35,7 +36,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		this.teacherTitle = teacherTitle;
 		this.courseWithStudents = new HashMap<>();
 		this.rate = 0.0;
-		this.bf = new BufferedReader(new InputStreamReader(System.in));
+
 	}
 
 	public void viewStudents() {
@@ -57,6 +58,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	}
 
 	public Pair viewJournal() throws IOException, UserNotFound {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter course name: ");
 		String name = bf.readLine();
 		Student s = null;
@@ -75,14 +77,17 @@ public class Teacher extends Employee implements Researcher, Serializable {
 			} else
 				throw new UserNotFound();
 		}
+		bf.close();
 		return new Pair(s, c);
 	}
 
 	public void putPoint() throws IOException, CourseNotFound, UserNotFound {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter course name: ");
 		String name = bf.readLine();
 		System.out.println("What is id of student?");
 		String id = bf.readLine();
+		bf.close();
 		for(Map.Entry<Course, List<Student>> entry : courseWithStudents.entrySet()){
 			if(entry.getKey().getName().equals(name)) {
 				Course course = entry.getKey();
@@ -100,12 +105,15 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	}
 
 	public void putPoint(Student student, Course course) throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter point: ");
 		double p = Double.parseDouble(bf.readLine());
 		student.getJournal().getPoints().get(course).add(new Lesson(p));
+		bf.close();
 	}
 
 	public void changePoint() throws IOException, ParseException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter course name: ");
 		String name = bf.readLine();
 		System.out.println("What is id of student?");
@@ -120,12 +128,14 @@ public class Teacher extends Employee implements Researcher, Serializable {
 				}
 			}
 		}
+		bf.close();
 	}
 
 	public void changePoint(Student student, Course course){
 	}
 
 	public void putAttendance() throws IOException, CourseNotFound, UserNotFound {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter course name: ");
 		String name = bf.readLine();
 		System.out.println("What is id of student?");
@@ -170,9 +180,11 @@ public class Teacher extends Employee implements Researcher, Serializable {
 			} else
 				throw new CourseNotFound();
 		}
+		bf.close();
 	}
 
 	public void putAttendance(Student student, Course course) throws IOException, CourseNotFound {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		if(student.getJournal().getPoints().containsKey(course)){
 			System.out.println("Choose lesson type: ");
 			System.out.println("1 -> LECTURE");
@@ -205,9 +217,11 @@ public class Teacher extends Employee implements Researcher, Serializable {
 			student.getJournal().getPoints().get(course).add(new Lesson(lessonType, attendance, 0.0));
 		} else
 			throw new CourseNotFound();
+		bf.close();
 	}
 
 	public void changeAttendance(Student student, Course course) throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter a date (format: dd/MM/yyyy): ");
 		String input = bf.readLine();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -218,6 +232,8 @@ public class Teacher extends Employee implements Researcher, Serializable {
 			throw new RuntimeException(e);
 		}
 //		student.getJournal().getPoints().put(course, )
+
+		bf.close();
 	}
 
 	public HashMap<Course, List<Student>> getCourseWithStudents() {
@@ -225,6 +241,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	}
 
 	public void putAttestationPoints() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter course name: ");
 		String name = bf.readLine();
 		System.out.println("Enter id of student: ");
@@ -251,9 +268,11 @@ public class Teacher extends Employee implements Researcher, Serializable {
 				}
 			}
 		}
+		bf.close();
 	}
 
 	public void putFinalExamMark() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter course name: ");
 		String name = bf.readLine();
 		System.out.println("Enter id of student: ");
@@ -268,6 +287,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 				}
 			}
 		}
+		bf.close();
 	}
 
 	public void viewCourses() {
@@ -279,6 +299,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	}
 
 	private Order createOrder(Student student) throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Type description: ");
 		String description = bf.readLine();
 		System.out.println("Choose urgency level: ");
@@ -292,11 +313,13 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		} else {
 			urgencyLevel = UrgencyLevel.HIGH;
 		}
+		bf.close();
 		return new Order(description, urgencyLevel, this, student);
 
 	}
 
 	public void sendComplaint() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		String name = bf.readLine();
 		for(List<Student> lst : courseWithStudents.values()){
 			for(Student student : lst){
@@ -305,6 +328,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 				}
 			}
 		}
+		bf.close();
 	}
 
 	public void sendRequest(Employee to, Request request) {

@@ -10,15 +10,10 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 
 public class Admin extends User implements Serializable {
-	private BufferedReader bf;
 
-	public Admin(){
-		bf = new BufferedReader(new InputStreamReader(System.in));
-	}
-
+	private static final long serialVersionUID = 1L;
 	public Admin(UserType userType, String id, String password, String username) {
 		super(userType, id, password, username);
-		bf = new BufferedReader(new InputStreamReader(System.in));
 	}
 
 	public void seeUsers(){
@@ -29,6 +24,7 @@ public class Admin extends User implements Serializable {
 	}
 
 	public void createUser() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Type here userType, id, password, username: ");
 		String userType = bf.readLine();
 		String id = bf.readLine();
@@ -41,11 +37,14 @@ public class Admin extends User implements Serializable {
 			Student student = new Student(UserType.STUDENT, id, password, username);
 			Data.getInstance().addUser(student);
 		}
+		bf.close();
 	}
 
 	public void deleteUser() throws IOException, UserNotFound {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter user name: ");
 		String name = bf.readLine();
+		bf.close();
 		for(User u : Data.getInstance().getUsers()){
 			if(u.getUsername().equals(name)){
 				Data.getInstance().deleteUser(u);
@@ -54,6 +53,7 @@ public class Admin extends User implements Serializable {
 			}
 		}
 		throw new UserNotFound();
+
 	}
 }
 

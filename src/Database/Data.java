@@ -15,41 +15,17 @@ public class Data implements Serializable {
 	private HashSet<Course> courses;
 	private List<News> news;
 	private Data() {
-		users = new HashSet<>();
-		courses = new HashSet<>();
-		news = new ArrayList<>();
+		users = User.users;
+		courses = Course.courses;
+		news = News.news;
 	}
 
-	static {
-		if (new File("dataFile").exists()) {
-			try {
-				instance = read();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			instance = new Data();
-		}
-	}
 
 	public static Data getInstance() {
 		if (instance == null) {
 			instance = new Data();
 		}
 		return instance;
-	}
-
-	private static Data read() throws IOException, ClassNotFoundException {
-		FileInputStream fis = new FileInputStream("dataFile");
-		ObjectInputStream oin = new ObjectInputStream(fis);
-		return (Data) oin.readObject();
-	}
-
-	public static void write() throws IOException {
-		FileOutputStream fos = new FileOutputStream("dataFile");
-		ObjectOutputStream oos = new ObjectOutputStream(fos);
-		oos.writeObject(instance);
-		oos.close();
 	}
 
 	public void addUser(User u) {
@@ -86,4 +62,12 @@ public class Data implements Serializable {
 			users.remove(u);
 		}
 	}
+
+	public void save() throws Exception {
+		Course.saveCourses();
+		News.saveNews();
+		User.saveUsers();
+
+    }
+
 }
