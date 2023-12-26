@@ -10,6 +10,7 @@ import java.util.Map;
 public class Transcript implements Serializable {
 	private double overallGpa;
 	private List<Mark> marks;
+
 	public Transcript(){
 		overallGpa = 0.0;
 		marks = new ArrayList<>();

@@ -1,5 +1,4 @@
 package Message;
-
 /**
  * This interface represents a readable object, which can be converted to a string representation.
  */

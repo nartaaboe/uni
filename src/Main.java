@@ -47,5 +47,6 @@ public class Main {
         Data.getInstance().getNews().add(news2);
         a.viewMenu();
         Data.getInstance().save();
+
     }
 }

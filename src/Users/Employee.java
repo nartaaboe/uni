@@ -97,6 +97,7 @@ public abstract class Employee extends User implements Serializable {
 		return new Request(title, description, this);
 	}
 
+
 	public void sendRequest() throws IOException {
 		for(User user : Data.getInstance().getUsers()){
 			if(user instanceof Manager){

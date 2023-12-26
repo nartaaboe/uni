@@ -53,7 +53,6 @@ public class Data implements Serializable {
 	public List<News> getNews() {
 		return news;
 	}
-
 	public HashSet<User> getUsers() {
 		return users;
 	}

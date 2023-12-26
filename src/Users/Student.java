@@ -2,6 +2,7 @@ package Users ;
 
 
 import Contents.*;
+import Database.Data;
 import Enums.Faculty;
 import Enums.UserType;
 import Users.Researcher;
@@ -49,10 +50,6 @@ public class Student extends User implements Researcher, Serializable {
 		}
 	}
 
-	public void registerForCourses(Teacher teacher, Course course) {
-
-	}
-
 	public void viewMarks() {
 		int i = 0;
 		for(Mark mark : getTranscript().getMarks()){
@@ -70,8 +67,25 @@ public class Student extends User implements Researcher, Serializable {
 		getJournal().showPoints();
 	}
 
+	public void registerForCourses() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Choose course to register in: ");
+		ListIterator<Course> iterator = (ListIterator<Course>) Data.getInstance().getCourses().iterator();
+		Course course = iterator.next();
+		while(true){
+			System.out.println("1 -> Register");
+			System.out.println("2 -> Next");
+			System.out.println("3 -> Previous");
+			System.out.println("4 -> Leave");
+			int n = Integer.parseInt(bf.readLine());
+			if(n == 1){
+				
+			}
+		}
+	}
+
 	public void rateTeachers() {
-		// TODO implement me
+
 	}
 
 	public Transcript getTranscript() {

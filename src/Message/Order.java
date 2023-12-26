@@ -16,7 +16,6 @@ public class Order implements Readable, Serializable {
 	 * The description of the order.
 	 */
 	private String description;
-
 	/**
 	 * The urgency level of the order (HIGH, MEDIUM, or LOW).
 	 */

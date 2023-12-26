@@ -202,7 +202,6 @@ public class Course implements Serializable {
 		Course course = (Course) o;
 		return getCredits() == course.getCredits() && Objects.equals(getCode(), course.getCode()) && Objects.equals(getName(), course.getName()) && Objects.equals(getPrerequisites(), course.getPrerequisites()) && getCourseType() == course.getCourseType() && getFaculty() == course.getFaculty() && Objects.equals(getMark(), course.getMark());
 	}
-
 	/**
 	 * Generates a hash code for the Course object based on its code, name, prerequisites, course type, credits, faculty, and mark.
 	 *

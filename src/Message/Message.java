@@ -2,7 +2,6 @@ package Message ;
 
 
 import java.io.Serializable;
-
 /**
  * This class represents a message within the system, encapsulating its theme (subject), description (body), and read status.
  */

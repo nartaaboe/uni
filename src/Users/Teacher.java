@@ -94,11 +94,6 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	 */
 	public void setCourseWithStudents(HashMap<Course, List<Student>> courseWithStudents) {
 		this.courseWithStudents = courseWithStudents;
-		for(Map.Entry<Course, List<Student>> entry : courseWithStudents.entrySet()){
-			for(Student s : entry.getValue()){
-				s.registerForCourses(this, entry.getKey());
-			}
-		}
 	}
 
 	/**
@@ -480,6 +475,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		}
 
 	}
+
 
 	/**
 	 * Sends a request to another employee.

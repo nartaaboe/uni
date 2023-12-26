@@ -12,7 +12,6 @@ import java.util.Objects;
  * A Lesson class representing a single lesson within a course, containing details like type, attendance, date, duration, and points.
  */
 public class Lesson implements Serializable {
-
 	/**
 	 * The duration of the lesson in hours.
 	 */

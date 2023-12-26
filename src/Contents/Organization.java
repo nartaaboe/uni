@@ -10,7 +10,6 @@ import java.util.HashSet;
  * An Organization class representing a student-run organization within the system.
  */
 public class Organization implements Serializable {
-
 	/**
 	 * The name of the organization.
 	 */

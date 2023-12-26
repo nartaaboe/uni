@@ -10,7 +10,6 @@ import java.util.Date;
  * This class represents a comment within the system, encapsulating the user who made the comment, the publication date, and the comment text.
  */
 public class Comment implements Readable, Serializable {
-
 	/**
 	 * The user who made the comment.
 	 */

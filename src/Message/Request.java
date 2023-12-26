@@ -49,7 +49,6 @@ public class Request implements Readable, Serializable {
 	public String read() {
 		return from.toString() + ": " + title + '\n' + description;
 	}
-
 	public String getTitle() {
 		return title;
 	}

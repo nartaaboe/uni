@@ -6,7 +6,6 @@ import Users.Student;
  * A Pair class representing an association between a student and a course.
  */
 public class Pair {
-
     /**
      * The Student object representing the student in the pair.
      */

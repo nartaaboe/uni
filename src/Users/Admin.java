@@ -13,7 +13,6 @@ import java.io.Serializable;
  * An Admin class representing an administrator user with system-wide management capabilities.
  */
 public class Admin extends User implements Serializable {
-
 	/**
 	 * The serial version UID.
 	 */

@@ -53,6 +53,7 @@ public class Mark implements Serializable {
 		return isPassed;
 	}
 
+
 	public void setAttestationFirst(double attestationFirst) {
 		this.attestationFirst = attestationFirst;
 	}

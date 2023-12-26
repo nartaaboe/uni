@@ -55,29 +55,64 @@ public class Manager extends Employee implements Serializable {
 		}
 	}
 
-	public void approveRegistration(Student student) {
+	public void approveRegistration() {
 
 	}
-
-	public void addCourseForRegistration(Course course){
-
-	}
-
-	public void assignCourse(){
+	public void assignCourseToTeacher(){
 
 	}
+	public void assignCourseToStudent(){
 
+	}
 	public void writeOutCourse(){
 
 	}
 
 	public void viewInfoAboutTeachers() {
+		for(User user : Data.getInstance().getUsers()){
+			if(user instanceof Teacher){
+				Teacher teacher = (Teacher) user;
+				System.out.println(teacher);
+			}
+		}
 	}
-
 	public void viewInfoAboutStudents() {
+		for(User user : Data.getInstance().getUsers()){
+			if(user instanceof Student){
+				Student student = (Student) user;
+				System.out.println(student);
+			}
+		}
 	}
 
 	public void statisticalReport() {
+		int s = 0;
+		int e = 0;
+		int m = 0;
+		int d = 0;
+		int r = 0;
+		int t = 0;
+		for(User user : Data.getInstance().getUsers()){
+			if(user instanceof Student)
+				s++;
+			if(user instanceof Employee){
+				e++;
+				if(user instanceof Teacher)
+					t++;
+				if(user instanceof Dean)
+					d++;
+				if(user instanceof Rector)
+					r++;
+				if(user instanceof Manager)
+					m++;
+			}
+		}
+		System.out.println("Number of students -> " + s);
+		System.out.println("Number of teachers -> " + t);
+		System.out.println("Number of managers -> " + m);
+		System.out.println("Number of deans -> " + d);
+		System.out.println("Number of rectors -> " + r);
+		System.out.println("Number of employee -> " + e);
 	}
 
 	private News createNews() throws IOException {
@@ -88,12 +123,15 @@ public class Manager extends Employee implements Serializable {
 		String content = bf.readLine();
 		return new News(title, new Date(), content, new HashSet<>());
 	}
+
 	public void addNews() throws IOException {
 		Data.getInstance().getNews().add(createNews());
 	}
+
 	public void removeNews(News news){
 		Data.getInstance().getNews().remove(news);
 	}
+
 	@Override
 	public void scrollNews() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -111,30 +149,24 @@ public class Manager extends Employee implements Serializable {
 				if(iterator.hasNext()){
 					news = iterator.next();
 					System.out.println(news);
-				}
-				else{
+				} else{
 					System.out.println("No more news!");
 					break;
 				}
-			}
-			else if(n == 2){
+			} else if(n == 2){
 				if(iterator.hasPrevious()){
 					iterator.previous();
 					news = iterator.previous();
 					System.out.println(news);
-				}
-				else {
+				} else {
 					System.out.println("No more news!");
 					break;
 				}
-			}
-			else if(n == 3){
+			} else if(n == 3){
 				removeNews(news);
-			}
-			else if(n == 4){
+			} else if(n == 4){
 				addNews();
-			}
-			else if(n == 5)
+			} else if(n == 5)
 				break;
 			else
 				throw new IOException();

@@ -127,6 +127,7 @@ public abstract class User implements Serializable {
 		return false;
 	}
 
+
 	public void scrollNews() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		ListIterator<News> iterator = Data.getInstance().getNews().listIterator();

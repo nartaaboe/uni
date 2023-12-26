@@ -47,7 +47,6 @@ public class Dean extends Teacher implements Serializable {
 	public TeacherType getTitle() {
 		return title;
 	}
-
 	public Queue<Order> getReceivedComplaints() {
 		return receivedComplaints;
 	}

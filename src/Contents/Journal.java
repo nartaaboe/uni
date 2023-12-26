@@ -12,7 +12,6 @@ import java.util.*;
  * A Journal class representing a student's academic journal, containing course-specific scores, attendance, and overall performance data.
  */
 public class Journal implements Serializable {
-
 	/**
 	 * A HashMap storing lesson scores for each course, organized by Course objects as keys and LinkedHashSets of Lesson objects as values.
 	 */

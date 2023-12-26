@@ -104,6 +104,7 @@ public class News implements Serializable {
 		return comments;
 	}
 
+
 	/**
 	 * Displays the title and content of the news article to the console.
 	 */
