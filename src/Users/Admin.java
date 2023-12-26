@@ -9,13 +9,31 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 
+/**
+ * An Admin class representing an administrator user with system-wide management capabilities.
+ */
 public class Admin extends User implements Serializable {
 
+	/**
+	 * The serial version UID.
+	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Creates a new Admin object with the specified details.
+	 *
+	 * @param userType    The user type (always UserType.ADMIN).
+	 * @param id          The admin's ID.
+	 * @param password    The admin's password.
+	 * @param username    The admin's username.
+	 */
 	public Admin(UserType userType, String id, String password, String username) {
 		super(userType, id, password, username);
 	}
 
+	/**
+	 * Displays a list of all users in the system.
+	 */
 	public void seeUsers(){
 		System.out.println("All users: ");
 		for(User u : Data.getInstance().getUsers()){
@@ -23,6 +41,11 @@ public class Admin extends User implements Serializable {
 		}
 	}
 
+	/**
+	 * Creates a new user in the system.
+	 *
+	 * @throws IOException If an I/O error occurs while reading user input.
+	 */
 	public void createUser() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Type here userType, id, password, username: ");
@@ -40,6 +63,12 @@ public class Admin extends User implements Serializable {
 		
 	}
 
+	/**
+	 * Deletes a user from the system.
+	 *
+	 * @throws IOException       If an I/O error occurs while reading user input.
+	 * @throws UserNotFound      If the specified user is not found.
+	 */
 	public void deleteUser() throws IOException, UserNotFound {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter user name: ");
