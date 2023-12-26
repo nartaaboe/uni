@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.*;
 
 public class Data implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private static Data instance;
 	private HashSet<User> users;

@@ -2,33 +2,30 @@ package Contents;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Transcript implements Serializable {
 	private double overallGpa;
-	private LinkedHashMap<Course, Mark> marks;
-
+	private List<Mark> marks;
 	public Transcript(){
 		overallGpa = 0.0;
-		marks = new LinkedHashMap<>();
+		marks = new ArrayList<>();
 	}
-
-	public Transcript(LinkedHashMap<Course, Mark> marks) {
+	public Transcript(List<Mark> marks) {
 		this.marks = marks;
 		calculateGPA();
 	}
-
 	public void calculateGPA(){
-		for(Map.Entry<Course, Mark> entry : marks.entrySet()){
 
-		}
 	}
 	public double getOverallGpa() {
 		return overallGpa;
 	}
 
-	public LinkedHashMap<Course, Mark> getMarks() {
+	public List<Mark> getMarks() {
 		return marks;
 	}
 }

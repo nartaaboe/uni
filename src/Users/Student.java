@@ -1,19 +1,16 @@
 package Users ;
 
 
-import Contents.Course;
-import Contents.Journal;
-import Contents.Mark;
-import Contents.Transcript;
+import Contents.*;
 import Enums.Faculty;
 import Enums.UserType;
 import Users.Researcher;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Student extends User implements Researcher, Serializable {
 	private static final long serialVersionUID = 1L;
@@ -58,9 +55,9 @@ public class Student extends User implements Researcher, Serializable {
 
 	public void viewMarks() {
 		int i = 0;
-		for(Map.Entry<Course, Mark> entry : transcript.getMarks().entrySet()){
+		for(Mark mark : getTranscript().getMarks()){
 			i++;
-			System.out.println(i + " -> " + entry.getKey() + ": " + entry.getValue());
+			System.out.println(i + " -> " + mark);
 		}
 	}
 
@@ -81,12 +78,18 @@ public class Student extends User implements Researcher, Serializable {
 		return transcript;
 	}
 
-	public double getGpa() {
-		return 0.0;
+	public void getGpa() {
+		System.out.println(getTranscript().getOverallGpa());
 	}
 
-	public void putAttendance() {
-		// TODO implement me
+	public void putAttendance() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		String name = bf.readLine();
+		for(Map.Entry<Course, LinkedHashSet<Lesson>> entry : getJournal().getPoints().entrySet()){
+			if(entry.getKey().getName().equals(name)){
+
+			}
+		}
 	}
 
 	@Override

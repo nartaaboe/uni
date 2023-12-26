@@ -1,6 +1,7 @@
 package Users ;
 
 import Contents.Lesson;
+import Contents.Mark;
 import Contents.Pair;
 import Enums.*;
 import Message.Order;
@@ -87,7 +88,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		String name = bf.readLine();
 		System.out.println("What is id of student?");
 		String id = bf.readLine();
-		
+
 		for(Map.Entry<Course, List<Student>> entry : courseWithStudents.entrySet()){
 			if(entry.getKey().getName().equals(name)) {
 				Course course = entry.getKey();
@@ -109,7 +110,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		System.out.println("Enter point: ");
 		double p = Double.parseDouble(bf.readLine());
 		student.getJournal().getPoints().get(course).add(new Lesson(p));
-		
+
 	}
 
 	public void changePoint() throws IOException, ParseException {
@@ -128,7 +129,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 				}
 			}
 		}
-		
+
 	}
 
 	public void changePoint(Student student, Course course){
@@ -180,7 +181,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 			} else
 				throw new CourseNotFound();
 		}
-		
+
 	}
 
 	public void putAttendance(Student student, Course course) throws IOException, CourseNotFound {
@@ -217,7 +218,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 			student.getJournal().getPoints().get(course).add(new Lesson(lessonType, attendance, 0.0));
 		} else
 			throw new CourseNotFound();
-		
+
 	}
 
 	public void changeAttendance(Student student, Course course) throws IOException {
@@ -233,7 +234,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		}
 //		student.getJournal().getPoints().put(course, )
 
-		
+
 	}
 
 	public HashMap<Course, List<Student>> getCourseWithStudents() {
@@ -257,18 +258,26 @@ public class Teacher extends Employee implements Researcher, Serializable {
 						if(n == 1){
 							System.out.println("Enter first attestation point: ");
 							double p = Double.parseDouble(bf.readLine());
-							student.getTranscript().getMarks().get(entry.getKey()).setAttestationFirst(p);
+							for(Mark mark : student.getTranscript().getMarks()){
+								if(mark.getCourse().equals(entry.getKey())){
+									mark.setAttestationFirst(p);
+								}
+							}
 						} else if(n == 2){
 							System.out.println("Enter second attestation point: ");
 							double p = Double.parseDouble(bf.readLine());
-							student.getTranscript().getMarks().get(entry.getKey()).setAttestationSecond(p);
+							for(Mark mark : student.getTranscript().getMarks()){
+								if(mark.getCourse().equals(entry.getKey())){
+									mark.setAttestationSecond(p);
+								}
+							}
 						} else
 							throw new IOException();
 					}
 				}
 			}
 		}
-		
+
 	}
 
 	public void putFinalExamMark() throws IOException {
@@ -277,17 +286,21 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		String name = bf.readLine();
 		System.out.println("Enter id of student: ");
 		String id = bf.readLine();
-		for(Map.Entry<Course, List<Student>> entry : courseWithStudents.entrySet()){
-			if(entry.getKey().getName().equals(name)){
-				for(Student student : entry.getValue()){
-					if(student.getId().equals(id)){
+		for(Map.Entry<Course, List<Student>> entry : courseWithStudents.entrySet()) {
+			if (entry.getKey().getName().equals(name)) {
+				for (Student student : entry.getValue()) {
+					if (student.getId().equals(id)) {
 						double p = Double.parseDouble(bf.readLine());
-						student.getTranscript().getMarks().get(entry.getKey()).setFinalExam(p);
+						for(Mark mark : student.getTranscript().getMarks()){
+							if(mark.getCourse().equals(entry.getKey())){
+								mark.setFinalExam(p);
+							}
+						}
 					}
 				}
 			}
 		}
-		
+
 	}
 
 	public void viewCourses() {
@@ -313,7 +326,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		} else {
 			urgencyLevel = UrgencyLevel.HIGH;
 		}
-		
+
 		return new Order(description, urgencyLevel, this, student);
 
 	}
@@ -328,7 +341,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 				}
 			}
 		}
-		
+
 	}
 
 	public void sendRequest(Employee to, Request request) {

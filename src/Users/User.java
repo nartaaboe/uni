@@ -7,9 +7,7 @@ import Enums.*;
 import Message.Comment;
 
 import java.io.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 
 public abstract class User implements Serializable {
@@ -70,8 +68,9 @@ public abstract class User implements Serializable {
 		System.out.println("Type your comment here: ");
 		String comment = bf.readLine();
 		Data.getInstance().getNews().get(n - 1).leaveComment(new Comment(this, new Date(), comment));
-		
+
 	}
+
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
@@ -99,7 +98,7 @@ public abstract class User implements Serializable {
 		if(p1.equals(password))
 			return true;
 		System.out.println("Wrong verification.");
-		
+
 		return false;
 	}
 
@@ -119,7 +118,7 @@ public abstract class User implements Serializable {
 
 		setPassword(newPassword);
 		System.out.println("Password is updated.");
-		
+
 	}
 
 
@@ -128,6 +127,37 @@ public abstract class User implements Serializable {
 		return false;
 	}
 
+	public void scrollNews() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		ListIterator<News> iterator = Data.getInstance().getNews().listIterator();
+		System.out.println(iterator.next());
+		while(true){
+			System.out.println("1 -> Next");
+			System.out.println("2 -> Previous");
+			System.out.println("3 -> Leave");
+			int n = Integer.parseInt(bf.readLine());
+			if(n == 1){
+				if(iterator.hasNext())
+					System.out.println(iterator.next());
+				else{
+					System.out.println("No more news!");
+					break;
+				}
+			}
+			else if(n == 2){
+				if(iterator.hasPrevious())
+					System.out.println(iterator.previous());
+				else {
+					System.out.println("No more news!");
+					break;
+				}
+			}
+			else if(n == 3)
+				break;
+			else
+				throw new IOException();
+		}
+	}
 
 	private static HashSet<User> loadUsers() {
 		File file = new File("db/users.ser");

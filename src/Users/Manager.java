@@ -7,6 +7,7 @@ import Enums.ManagerType;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import Contents.News;
 import Message.Request;
 
 public class Manager extends Employee implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private ManagerType managerType;
 	private Faculty faculty;

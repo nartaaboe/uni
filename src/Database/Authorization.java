@@ -100,8 +100,8 @@ public class Authorization {
             System.out.println("3 -> See transcript");
             System.out.println("4 -> Put attendance");
             System.out.println("5 -> News");
-
-            System.out.println("6 -> Exit System");
+            System.out.println("6 -> Mark");
+            System.out.println("7 -> Exit System");
             int n = Integer.parseInt(bf.readLine());
             switch (n){
                 case 1:
@@ -140,9 +140,12 @@ public class Authorization {
                     student.putAttendance();
                     break;
                 case 5:
-                    student.leaveCommentToNews();
+                    student.scrollNews();
                     break;
                 case 6:
+                    student.viewMarks();
+                    break;
+                case 7:
                     exitSystem = false;
                     return;
                 default:

@@ -4,14 +4,28 @@ package Contents;
 import java.io.Serializable;
 
 public class Mark implements Serializable {
+	private Course course;
 	private double attestationFirst;
 	private double attestationSecond;
 	private double finalExam;
 	private double total;
 	private boolean isPassed;
-	public Mark(){
+	public Mark(Course course){
+		this.course = course;
+		attestationFirst = 0.0;
+		attestationSecond = 0.0;
+		finalExam = 0.0;
+		total = 0.0;
 	}
-	public Mark(double attestationFirst, double attestationSecond, double finalExam) {
+	public Mark(Course course, double attestationFirst, double attestationSecond){
+		this.course = course;
+		this.attestationFirst = attestationFirst;
+		this.attestationSecond = attestationSecond;
+		this.finalExam = 0.0;
+		this.total = attestationFirst + attestationSecond;
+	}
+	public Mark(Course course, double attestationFirst, double attestationSecond, double finalExam) {
+		this.course = course;
 		this.attestationFirst = attestationFirst;
 		this.attestationSecond = attestationSecond;
 		this.finalExam = finalExam;
@@ -49,6 +63,10 @@ public class Mark implements Serializable {
 
 	public void setFinalExam(double finalExam) {
 		this.finalExam = finalExam;
+	}
+
+	public Course getCourse() {
+		return course;
 	}
 
 	public Character getLetterGrade(){

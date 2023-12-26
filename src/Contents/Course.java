@@ -33,7 +33,7 @@ public class Course implements Serializable {
 		this.courseType = courseType;
 		this.credits = credits;
 		this.faculty = faculty;
-		this.mark = new Mark();
+		this.mark = new Mark(this);
 	}
 
 	public String getCode() {
