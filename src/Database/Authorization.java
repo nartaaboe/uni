@@ -12,15 +12,35 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 
-
+/**
+ * Handles user authentication, authorization, and role-based menu navigation within the University System.
+ */
 public class Authorization {
+
+    /**
+     * The currently logged-in user.
+     */
     private User user;
 
+    /**
+     * A flag indicating whether the system should continue running.
+     */
     private boolean exitSystem;
+
+    /**
+     * Constructs a new Authorization object.
+     */
     public Authorization(){
 
         exitSystem = false;
     }
+
+    /**
+     * Authenticates a user with the given username and password.
+     *
+     * @throws IOException if an error occurs while reading input
+     * @throws UserNotFound if the user is not found in the system
+     */
     public void login() throws IOException, UserNotFound {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter username: ");
@@ -38,6 +58,13 @@ public class Authorization {
         throw new UserNotFound();
 
     }
+
+    /**
+     * Logs out the currently logged-in user.
+     *
+     * @throws IOException if an error occurs while reading input
+     * @throws UserNotFound if no user is currently logged in
+     */
     public void logout() throws IOException, UserNotFound {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter username: ");
@@ -53,6 +80,15 @@ public class Authorization {
         
         throw new UserNotFound();
     }
+
+    /**
+     * Displays the main menu of the University System, handles user login, and directs users to role-based features.
+     *
+     * @throws IOException if an error occurs while reading input
+     * @throws UserNotFound if a user is not found in the system
+     * @throws ParseException if an error occurs while parsing input
+     * @throws CourseNotFound if a course is not found in the system
+     */
     public void viewMenu() throws IOException, UserNotFound, ParseException, CourseNotFound {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         exitSystem = true;
@@ -90,6 +126,13 @@ public class Authorization {
 
 
     }
+
+    /**
+     * Handles the student-specific menu and features within the University System.
+     *
+     * @throws IOException if an error occurs while reading input
+     * @throws UserNotFound if the student user is not found in the system
+     */
     private void runStudent() throws IOException, UserNotFound {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Student student = (Student) user;
@@ -153,6 +196,13 @@ public class Authorization {
             }
         }
     }
+
+    /**
+     * Handles the admin-specific menu and features within the University System.
+     *
+     * @throws IOException if an error occurs while reading input
+     * @throws UserNotFound if the admin user is not found in the system
+     */
     private void runAdmin() throws IOException, UserNotFound {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Admin admin = (Admin) user;
@@ -186,6 +236,14 @@ public class Authorization {
         }
     }
 
+    /**
+     * Handles the teacher-specific menu and features within the University System.
+     *
+     * @throws IOException if an error occurs while reading input
+     * @throws UserNotFound if the teacher user is not found in the system
+     * @throws ParseException if an error occurs while parsing input
+     * @throws CourseNotFound if a course is not found in the system
+     */
     private void runTeacher() throws IOException, UserNotFound, ParseException, CourseNotFound {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Teacher teacher = (Teacher) user;
@@ -263,6 +321,13 @@ public class Authorization {
             }
         }
     }
+
+    /**
+     * Handles the manager-specific menu and features within the University System.
+     *
+     * @throws IOException if an error occurs while reading input
+     * @throws UserNotFound if the manager user is not found in the system
+     */
     private void runManager() throws UserNotFound, IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Manager manager = (Manager) user;
@@ -296,12 +361,33 @@ public class Authorization {
             }
         }
     }
+
+    /**
+     * Handles the tech support specialist-specific menu and features within the University System.
+     *
+     * @throws IOException if an error occurs while reading input
+     * @throws UserNotFound if the tech support specialist user is not found in the system
+     */
     private void runTechSupportSpecialist(){
         TechSupportSpecialist techSupportSpecialist = (TechSupportSpecialist) user;
     }
+
+    /**
+     * Handles the dean-specific menu and features within the University System.
+     *
+     * @throws IOException if an error occurs while reading input
+     * @throws UserNotFound if the dean user is not found in the system
+     */
     private void runDean(){
         Dean dean = (Dean) user;
     }
+
+    /**
+     * Handles the rector-specific menu and features within the University System.
+     *
+     * @throws IOException if an error occurs while reading input
+     * @throws UserNotFound if the rector user is not found in the system
+     */
     private void runRector(){
         Rector rector = (Rector) user;
     }
