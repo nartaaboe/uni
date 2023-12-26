@@ -41,8 +41,11 @@ public class Main {
         Data.getInstance().addUser(teacher1);
         Data.getInstance().addUser(student1);
         Data.getInstance().addUser(student2);
+        News news1 = new News("Bomb in kbtu", new Date(1638789000000L), "bla bla", new HashSet<>());
+        News news2 = new News("New year!", new Date(), "New semak starts with new year...", new HashSet<>());
+        Data.getInstance().getNews().add(news1);
+        Data.getInstance().getNews().add(news2);
         a.viewMenu();
-
         Data.getInstance().save();
     }
 }

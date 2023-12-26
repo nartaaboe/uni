@@ -145,8 +145,10 @@ public abstract class User implements Serializable {
 				}
 			}
 			else if(n == 2){
-				if(iterator.hasPrevious())
+				if(iterator.hasPrevious()){
+					iterator.previous();
 					System.out.println(iterator.previous());
+				}
 				else {
 					System.out.println("No more news!");
 					break;

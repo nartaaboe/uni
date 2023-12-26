@@ -36,7 +36,6 @@ public class News implements Serializable {
 	/**
 	 * A BufferedReader object for reading user input (likely used for comment input).
 	 */
-	private BufferedReader bf;
 
 	/**
 	 * A static list containing all news articles, loaded from a file upon class initialization.
@@ -51,7 +50,6 @@ public class News implements Serializable {
 	 * Creates a new News object with empty content and comments.
 	 */
 	public News(){
-		bf = new BufferedReader(new InputStreamReader(System.in));
 	}
 
 	/**
@@ -67,7 +65,6 @@ public class News implements Serializable {
 		this.publicationDate = publicationDate;
 		this.content = content;
 		this.comments = comments;
-		this.bf = new BufferedReader(new InputStreamReader(System.in));
 	}
 
 	/**
