@@ -37,14 +37,14 @@ public class Admin extends User implements Serializable {
 			Student student = new Student(UserType.STUDENT, id, password, username);
 			Data.getInstance().addUser(student);
 		}
-		bf.close();
+		
 	}
 
 	public void deleteUser() throws IOException, UserNotFound {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter user name: ");
 		String name = bf.readLine();
-		bf.close();
+		
 		for(User u : Data.getInstance().getUsers()){
 			if(u.getUsername().equals(name)){
 				Data.getInstance().deleteUser(u);

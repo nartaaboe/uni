@@ -15,13 +15,14 @@ import java.text.ParseException;
 
 public class Authorization {
     private User user;
-    private BufferedReader bf;
+
     private boolean exitSystem;
     public Authorization(){
-        bf = new BufferedReader(new InputStreamReader(System.in));
+
         exitSystem = false;
     }
     public void login() throws IOException, UserNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter username: ");
         String username = bf.readLine();
         System.out.println("Enter password: ");
@@ -33,9 +34,12 @@ public class Authorization {
                 return;
             }
         }
+        
         throw new UserNotFound();
+
     }
     public void logout() throws IOException, UserNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter username: ");
         String username = bf.readLine();
         System.out.println("Enter password: ");
@@ -46,14 +50,16 @@ public class Authorization {
                 this.user = null;
                 return;
         }
+        
         throw new UserNotFound();
     }
     public void viewMenu() throws IOException, UserNotFound, ParseException, CourseNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         exitSystem = true;
         while(true){
             if(!exitSystem)
                 return;
-            BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+
             System.out.println("----Welcome to University System!----");
             System.out.println("choose one option!");
             System.out.println("1 -> Login.");
@@ -81,8 +87,11 @@ public class Authorization {
                 return;
             }
         }
+
+
     }
     private void runStudent() throws IOException, UserNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Student student = (Student) user;
         while(true){
             System.out.println("--------------Menu------------");
@@ -142,6 +151,7 @@ public class Authorization {
         }
     }
     private void runAdmin() throws IOException, UserNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Admin admin = (Admin) user;
         while(true) {
             System.out.println("--------------Menu------------");
@@ -174,6 +184,7 @@ public class Authorization {
     }
 
     private void runTeacher() throws IOException, UserNotFound, ParseException, CourseNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Teacher teacher = (Teacher) user;
         while(true) {
             System.out.println("--------------Menu------------");
@@ -250,6 +261,7 @@ public class Authorization {
         }
     }
     private void runManager() throws UserNotFound, IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Manager manager = (Manager) user;
         while(true){
             System.out.println("--------------Menu------------");

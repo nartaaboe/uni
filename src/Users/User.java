@@ -70,7 +70,7 @@ public abstract class User implements Serializable {
 		System.out.println("Type your comment here: ");
 		String comment = bf.readLine();
 		Data.getInstance().getNews().get(n - 1).leaveComment(new Comment(this, new Date(), comment));
-		bf.close();
+		
 	}
 	public void setUserType(UserType userType) {
 		this.userType = userType;
@@ -99,7 +99,7 @@ public abstract class User implements Serializable {
 		if(p1.equals(password))
 			return true;
 		System.out.println("Wrong verification.");
-		bf.close();
+		
 		return false;
 	}
 
@@ -119,7 +119,7 @@ public abstract class User implements Serializable {
 
 		setPassword(newPassword);
 		System.out.println("Password is updated.");
-		bf.close();
+		
 	}
 
 

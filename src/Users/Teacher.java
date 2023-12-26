@@ -77,7 +77,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 			} else
 				throw new UserNotFound();
 		}
-		bf.close();
+
 		return new Pair(s, c);
 	}
 
@@ -87,7 +87,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		String name = bf.readLine();
 		System.out.println("What is id of student?");
 		String id = bf.readLine();
-		bf.close();
+		
 		for(Map.Entry<Course, List<Student>> entry : courseWithStudents.entrySet()){
 			if(entry.getKey().getName().equals(name)) {
 				Course course = entry.getKey();
@@ -109,7 +109,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		System.out.println("Enter point: ");
 		double p = Double.parseDouble(bf.readLine());
 		student.getJournal().getPoints().get(course).add(new Lesson(p));
-		bf.close();
+		
 	}
 
 	public void changePoint() throws IOException, ParseException {
@@ -128,7 +128,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 				}
 			}
 		}
-		bf.close();
+		
 	}
 
 	public void changePoint(Student student, Course course){
@@ -180,7 +180,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 			} else
 				throw new CourseNotFound();
 		}
-		bf.close();
+		
 	}
 
 	public void putAttendance(Student student, Course course) throws IOException, CourseNotFound {
@@ -217,7 +217,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 			student.getJournal().getPoints().get(course).add(new Lesson(lessonType, attendance, 0.0));
 		} else
 			throw new CourseNotFound();
-		bf.close();
+		
 	}
 
 	public void changeAttendance(Student student, Course course) throws IOException {
@@ -233,7 +233,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		}
 //		student.getJournal().getPoints().put(course, )
 
-		bf.close();
+		
 	}
 
 	public HashMap<Course, List<Student>> getCourseWithStudents() {
@@ -268,7 +268,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 				}
 			}
 		}
-		bf.close();
+		
 	}
 
 	public void putFinalExamMark() throws IOException {
@@ -287,7 +287,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 				}
 			}
 		}
-		bf.close();
+		
 	}
 
 	public void viewCourses() {
@@ -313,7 +313,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 		} else {
 			urgencyLevel = UrgencyLevel.HIGH;
 		}
-		bf.close();
+		
 		return new Order(description, urgencyLevel, this, student);
 
 	}
@@ -328,7 +328,7 @@ public class Teacher extends Employee implements Researcher, Serializable {
 				}
 			}
 		}
-		bf.close();
+		
 	}
 
 	public void sendRequest(Employee to, Request request) {

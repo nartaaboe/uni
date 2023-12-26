@@ -68,7 +68,7 @@ public class Journal implements Serializable {
 			}
 		}
 		allAbsents += (allLate / 2);
-		bf.close();
+		
 	}
 
 	public void showPoints(Course course) throws IOException {
