@@ -1,15 +1,25 @@
 package Contents;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Represents an event with a title, start date, and finish date.
  */
-public class Event {
+public class Event implements Serializable {
     // Fields
+
+    private static final long serialVersionUID = 2L;
     private String title;
     private Date startDate;
     private Date finishDate;
+
+    /**
+     * Empty Constructs an Event
+     */
+    public Event(){
+
+    }
 
     /**
      * Constructs an Event with the specified title, start date, and finish date.

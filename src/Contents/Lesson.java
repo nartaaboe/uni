@@ -11,7 +11,10 @@ import java.util.Objects;
 /**
  * A Lesson class representing a single lesson within a course, containing details like type, attendance, date, duration, and points.
  */
-public class Lesson implements Serializable {
+public class Lesson extends Event implements Serializable {
+
+	private static final long serialVersionUID = 2L;
+
 	/**
 	 * The duration of the lesson in hours.
 	 */
@@ -47,6 +50,7 @@ public class Lesson implements Serializable {
 	 * - Point: 0.0
 	 */
 	public Lesson(){
+		super();
 		this.lessonType = LessonType.LECTURE;
 		this.attendance = Attendance.ATTENDED;
 		this.date = new Date();

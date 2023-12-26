@@ -5,9 +5,11 @@ import Contents.News;
 import Database.Data;
 import Enums.*;
 import Message.Comment;
+import Utils.Hashing.SHA256;
 
 import java.io.*;
 import java.util.*;
+
 
 
 public abstract class User implements Serializable {
@@ -32,7 +34,7 @@ public abstract class User implements Serializable {
 	public User(UserType userType, String id, String password, String username) {
 		this.userType = userType;
 		this.id = id;
-		this.password = password;
+		this.password = SHA256.getHash(password);
 		this.username = username;
 
 	}
@@ -80,7 +82,7 @@ public abstract class User implements Serializable {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = SHA256.getHash(password);
 	}
 
 	public void setUsername(String username) {
@@ -95,7 +97,7 @@ public abstract class User implements Serializable {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter current password: ");
 		String p1 = bf.readLine();
-		if(p1.equals(password))
+		if(p1.equals(SHA256.getHash(password)))
 			return true;
 		System.out.println("Wrong verification.");
 
