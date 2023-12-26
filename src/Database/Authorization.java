@@ -12,41 +12,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 
-/**
- * This class manages the authorization and menu navigation for different user types within the university system.
- */
-public class Authorization {
 
-    /**
-     * The currently logged-in user.
-     */
+public class Authorization {
     private User user;
 
-    /**
-     * A buffered reader used for input.
-     */
-    private BufferedReader bf;
-
-    /**
-     * A flag indicating whether the system should exit.
-     */
     private boolean exitSystem;
-
-    /**
-     * Constructs a new Authorization object and initializes fields.
-     */
     public Authorization(){
-        bf = new BufferedReader(new InputStreamReader(System.in));
+
         exitSystem = false;
     }
-
-    /**
-     * Authenticates a user based on their username and password.
-     *
-     * @throws IOException If an I/O error occurs.
-     * @throws UserNotFound If the user is not found.
-     */
     public void login() throws IOException, UserNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter username: ");
         String username = bf.readLine();
         System.out.println("Enter password: ");
@@ -58,17 +34,12 @@ public class Authorization {
                 return;
             }
         }
+        
         throw new UserNotFound();
+
     }
-
-    /**
-     * Logs out the current user.
-     *
-     * @throws IOException If an I/O error occurs.
-     * @throws UserNotFound If the user is not found.
-     */
-
     public void logout() throws IOException, UserNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter username: ");
         String username = bf.readLine();
         System.out.println("Enter password: ");
@@ -79,23 +50,16 @@ public class Authorization {
                 this.user = null;
                 return;
         }
+        
         throw new UserNotFound();
     }
-
-    /**
-     * Displays the main menu and handles user interactions.
-     *
-     * @throws IOException If an I/O error occurs.
-     * @throws UserNotFound If the user is not found.
-     * @throws ParseException If a parsing error occurs.
-     * @throws CourseNotFound If a course is not found.
-     */
     public void viewMenu() throws IOException, UserNotFound, ParseException, CourseNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         exitSystem = true;
         while(true){
             if(!exitSystem)
                 return;
-            BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+
             System.out.println("----Welcome to University System!----");
             System.out.println("choose one option!");
             System.out.println("1 -> Login.");
@@ -123,15 +87,11 @@ public class Authorization {
                 return;
             }
         }
-    }
 
-    /**
-     * Launches functions for the student.
-     *
-     * @throws IOException If an I/O error occurs.
-     * @throws UserNotFound If the user is not found.
-     */
+
+    }
     private void runStudent() throws IOException, UserNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Student student = (Student) user;
         while(true){
             System.out.println("--------------Menu------------");
@@ -140,6 +100,7 @@ public class Authorization {
             System.out.println("3 -> See transcript");
             System.out.println("4 -> Put attendance");
             System.out.println("5 -> News");
+
             System.out.println("6 -> Exit System");
             int n = Integer.parseInt(bf.readLine());
             switch (n){
@@ -189,14 +150,8 @@ public class Authorization {
             }
         }
     }
-
-    /**
-     * Launches functions for the admin.
-     *
-     * @throws IOException If an I/O error occurs.
-     * @throws UserNotFound If the user is not found.
-     */
     private void runAdmin() throws IOException, UserNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Admin admin = (Admin) user;
         while(true) {
             System.out.println("--------------Menu------------");
@@ -228,15 +183,8 @@ public class Authorization {
         }
     }
 
-    /**
-     * Launches functions for the teacher.
-     *
-     * @throws IOException If an I/O error occurs.
-     * @throws UserNotFound If the user is not found.
-     * @throws ParseException If a parsing error occurs.
-     * @throws CourseNotFound If a course is not found.
-     */
     private void runTeacher() throws IOException, UserNotFound, ParseException, CourseNotFound {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Teacher teacher = (Teacher) user;
         while(true) {
             System.out.println("--------------Menu------------");
@@ -312,14 +260,8 @@ public class Authorization {
             }
         }
     }
-
-    /**
-     * Launches functions for the manager..
-     *
-     * @throws IOException If an I/O error occurs.
-     * @throws UserNotFound If the user is not found.
-     */
     private void runManager() throws UserNotFound, IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Manager manager = (Manager) user;
         while(true){
             System.out.println("--------------Menu------------");
@@ -348,24 +290,12 @@ public class Authorization {
             }
         }
     }
-
-    /**
-     * Launches functions for the tech support specialist.
-     */
     private void runTechSupportSpecialist(){
         TechSupportSpecialist techSupportSpecialist = (TechSupportSpecialist) user;
     }
-
-    /**
-     * Launches functions for the dean.
-     */
     private void runDean(){
         Dean dean = (Dean) user;
     }
-
-    /**
-     * Launches functions for the rector.
-     */
     private void runRector(){
         Rector rector = (Rector) user;
     }

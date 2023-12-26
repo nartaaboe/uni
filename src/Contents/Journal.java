@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Journal implements Serializable {
-	BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+
 	private HashMap<Course, LinkedHashSet<Lesson>> points;
 	private double allPoints;
 	private int allAttends;
@@ -47,6 +47,7 @@ public class Journal implements Serializable {
 		System.out.println("Attended: " + allAttends + ", Absent: " + allAbsents);
 	}
 	public void showPoints() throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter course name: ");
 		String name = bf.readLine();
 		int allLate = 0;
@@ -67,6 +68,7 @@ public class Journal implements Serializable {
 			}
 		}
 		allAbsents += (allLate / 2);
+		
 	}
 
 	public void showPoints(Course course) throws IOException {

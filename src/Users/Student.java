@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Student extends User implements Researcher, Serializable {
+	private static final long serialVersionUID = 1L;
 	private Faculty faculty;
 	private Journal journal;
 	private HashMap<Teacher, Course> teacherCourse;
