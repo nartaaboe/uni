@@ -1,10 +1,11 @@
 package Message ;
 
-import Users.Employee;
+import Contents.Course;
+import Users.Student;
+import Users.Teacher;
+import Users.User;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.nio.CharBuffer;
 
 /**
  * This class represents a request within the system, encapsulating its description and the employee who sent it.
@@ -16,11 +17,11 @@ public class Request implements Readable, Serializable {
 	 *
 	 */
 	private String description;
-
+	private Course course;
 	/**
 	 * The employee who sent the request.
 	 */
-	private Employee from;
+	private User from;
 
 	/**
 	 * Creates a request with default values.
@@ -34,12 +35,16 @@ public class Request implements Readable, Serializable {
 	 * @param description   The description of the request.
 	 * @param from          The employee who sent the request.
 	 */
-	public Request(String title, String description, Employee from) {
+	public Request(String title, String description, User from) {
 		this.title = title;
 		this.description = description;
 		this.from = from;
 	}
-
+	public Request(String title, Course course, User from){
+		this.title =title;
+		this.course = course;
+		this.from = from;
+	}
 	/**
 	 * Returns a formatted string representation of the request, suitable for reading.
 	 * Includes the sender's information and the request description.
@@ -51,6 +56,10 @@ public class Request implements Readable, Serializable {
 	}
 	public String getTitle() {
 		return title;
+	}
+
+	public Course getCourse() {
+		return course;
 	}
 
 	/**
@@ -67,7 +76,7 @@ public class Request implements Readable, Serializable {
 	 *
 	 * @return The employee who sent the request.
 	 */
-	public Employee getFrom() {
+	public User getFrom() {
 		return from;
 	}
 

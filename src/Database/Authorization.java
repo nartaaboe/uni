@@ -50,13 +50,13 @@ public class Authorization {
      */
     public void login() throws IOException, UserNotFound {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter username: ");
+        System.out.println(Data.getInstance().getText("enterUsername", lang));
         String username = bf.readLine();
-        System.out.println("Enter password: ");
+        System.out.println(Data.getInstance().getText("enterPassword", lang));
         String password = bf.readLine();
         for (User u : Data.getInstance().getUsers()) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                System.out.println("Successfully authorized!");
+                System.out.println(Data.getInstance().getText("successfullyAuthorized", lang));
                 this.user = u;
                 return;
             }
@@ -74,13 +74,13 @@ public class Authorization {
      */
     public void logout() throws IOException, UserNotFound {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter username: ");
+        System.out.println(Data.getInstance().getText("enterUsername", lang));
         String username = bf.readLine();
-        System.out.println("Enter password: ");
+        System.out.println(Data.getInstance().getText("enterPassword", lang));
         String password = bf.readLine();
         for(User u : Data.getInstance().getUsers()){
             if(u.getUsername().equals(username) && u.getPassword().equals(password))
-                System.out.println("Successfully logout!");
+                System.out.println(Data.getInstance().getText("successfullyAuthorized", lang));
                 this.user = null;
                 return;
         }
@@ -104,10 +104,10 @@ public class Authorization {
                 return;
 
             System.out.println("----" + Data.getInstance().getText("welcomeMessage", lang) + "----");
-            System.out.println("choose one option!");
-            System.out.println("1 -> Login.");
-            System.out.println("2 -> Language.");
-            System.out.println("3 -> Exit System.");
+            System.out.println(Data.getInstance().getText("chooseOption", lang));
+            System.out.println("1 -> " + Data.getInstance().getText("login", lang));
+            System.out.println("2 -> " + Data.getInstance().getText("language", lang));
+            System.out.println("3 -> " + Data.getInstance().getText("exitSystem", lang));
             int n = Integer.parseInt(bf.readLine()); 
             if(n == 1){
                 login();
@@ -149,14 +149,16 @@ public class Authorization {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Student student = (Student) user;
         while(true){
-            System.out.println("--------------Menu------------");
-            System.out.println("1 -> Logout");
-            System.out.println("2 -> See journal");
-            System.out.println("3 -> See transcript");
-            System.out.println("4 -> Put attendance");
-            System.out.println("5 -> News");
-            System.out.println("6 -> Mark");
-            System.out.println("7 -> Exit System");
+            System.out.println("--------------" + Data.getInstance().getText("menu", lang) + "------------");
+            System.out.println("1 -> " + Data.getInstance().getText("logout", lang));
+            System.out.println("2 -> " + Data.getInstance().getText("seeJournal", lang));
+            System.out.println("3 -> " + Data.getInstance().getText("seeTranscript", lang));
+            System.out.println("4 -> " + Data.getInstance().getText("putAttendance", lang));
+            System.out.println("5 -> " + Data.getInstance().getText("news", lang));
+            System.out.println("6 -> " + Data.getInstance().getText("mark", lang));
+            System.out.println("7 -> " + Data.getInstance().getText("language", lang));
+            System.out.println("8 -> " + Data.getInstance().getText("exitSystem", lang));
+
             int n = Integer.parseInt(bf.readLine());
             switch (n){
                 case 1:
@@ -165,11 +167,12 @@ public class Authorization {
                 case 2:
                     student.viewJournal();
                     while(true){
-                        System.out.println("-------------Journal----------");
-                        System.out.println("1 -> Logout");
-                        System.out.println("2 -> Get over all points");
-                        System.out.println("3 -> Get over all attendances");
-                        System.out.println("4 -> Exit system");
+                        System.out.println("--------------" + Data.getInstance().getText("journal", lang) + "------------");
+                        System.out.println("1 -> " + Data.getInstance().getText("logout", lang));
+                        System.out.println("2 -> " + Data.getInstance().getText("getOverallPoints", lang));
+                        System.out.println("3 -> " + Data.getInstance().getText("getOverallAttendances", lang));
+                        System.out.println("4 -> " + Data.getInstance().getText("exitSystem", lang));
+
                         int m = Integer.parseInt(bf.readLine());
                         switch (m){
                             case 1:
@@ -201,6 +204,9 @@ public class Authorization {
                     student.viewMarks();
                     break;
                 case 7:
+                    changeLanguage();
+                    break;
+                case 8:
                     exitSystem = false;
                     return;
                 default:
@@ -219,12 +225,14 @@ public class Authorization {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Admin admin = (Admin) user;
         while(true) {
-            System.out.println("--------------Menu------------");
-            System.out.println("1 -> Logout");
-            System.out.println("2 -> See all users");
-            System.out.println("3 -> Create user");
-            System.out.println("4 -> Delete user");
-            System.out.println("5 -> Exit System");
+            System.out.println("--------------" + Data.getInstance().getText("menu", lang) + "------------");
+            System.out.println("1 -> " + Data.getInstance().getText("logout", lang));
+            System.out.println("2 -> " + Data.getInstance().getText("seeAllUsers", lang));
+            System.out.println("3 -> " + Data.getInstance().getText("createUser", lang));
+            System.out.println("4 -> " + Data.getInstance().getText("deleteUser", lang));
+            System.out.println("5 -> " + Data.getInstance().getText("language", lang));
+            System.out.println("6 -> " + Data.getInstance().getText("exitSystem", lang));
+
             int n = Integer.parseInt(bf.readLine());
             switch (n){
                 case 1:
@@ -240,6 +248,9 @@ public class Authorization {
                     admin.deleteUser();
                     break;
                 case 5:
+                    changeLanguage();
+                    break;
+                case 6:
                     exitSystem = false;
                     return;
                 default:
@@ -260,15 +271,17 @@ public class Authorization {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Teacher teacher = (Teacher) user;
         while(true) {
-            System.out.println("--------------Menu------------");
-            System.out.println("1 -> Logout");
-            System.out.println("2 -> See all students");
-            System.out.println("3 -> See journal");
-            System.out.println("4 -> Put attestation point");
-            System.out.println("5 -> Put final exam point");
-            System.out.println("6 -> Send complaint");
-            System.out.println("7 -> Send message");
-            System.out.println("5 -> Exit system");
+            System.out.println("--------------" + Data.getInstance().getText("menu", lang) + "------------");
+            System.out.println("1 -> " + Data.getInstance().getText("logout", lang));
+            System.out.println("2 -> " + Data.getInstance().getText("seeAllStudents", lang));
+            System.out.println("3 -> " + Data.getInstance().getText("seeJournal", lang));
+            System.out.println("4 -> " + Data.getInstance().getText("putAttestationPoint", lang));
+            System.out.println("5 -> " + Data.getInstance().getText("putFinalExamPoint", lang));
+            System.out.println("6 -> " + Data.getInstance().getText("sendComplaint", lang));
+            System.out.println("7 -> " + Data.getInstance().getText("sendMessage", lang));
+            System.out.println("8 -> " + Data.getInstance().getText("language", lang));
+            System.out.println("9 -> " + Data.getInstance().getText("exitSystem", lang));
+
             int n = Integer.parseInt(bf.readLine());
             switch (n){
                 case 1:
@@ -282,13 +295,14 @@ public class Authorization {
                     while(true){
                         Student student = pair.getStudent();
                         Course course = pair.getCourse();
-                        System.out.println("-------------Journal----------");
-                        System.out.println("1 -> Logout");
-                        System.out.println("2 -> Put point");
-                        System.out.println("3 -> Change point");
-                        System.out.println("4 -> Put attendance");
-                        System.out.println("5 -> Change attendance");
-                        System.out.println("6 -> Exit System");
+                        System.out.println("--------------" + Data.getInstance().getText("journal", lang) + "------------");
+                        System.out.println("1 -> " + Data.getInstance().getText("logout", lang));
+                        System.out.println("2 -> " + Data.getInstance().getText("putPoint", lang));
+                        System.out.println("3 -> " + Data.getInstance().getText("changePoint", lang));
+                        System.out.println("4 -> " + Data.getInstance().getText("putAttendance", lang));
+                        System.out.println("5 -> " + Data.getInstance().getText("changeAttendance", lang));
+                        System.out.println("6 -> " + Data.getInstance().getText("exitSystem", lang));
+
                         int m = Integer.parseInt(bf.readLine());
                         switch (m) {
                             case 1:
@@ -326,6 +340,9 @@ public class Authorization {
                 case 7:
                     break;
                 case 8:
+                    changeLanguage();
+                    break;
+                case 9:
                     exitSystem= false;
                     return;
                 default:
@@ -344,15 +361,17 @@ public class Authorization {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Manager manager = (Manager) user;
         while(true){
-            System.out.println("--------------Menu------------");
-            System.out.println("1 -> Logout");
-            System.out.println("2 -> See info about students");
-            System.out.println("3 -> See info about teachers");
-            System.out.println("4 -> Assign course to teacher");
-            System.out.println("5 -> Assign course to student");
-            System.out.println("6 -> News");
-            System.out.println("7 -> View requests");
-            System.out.println("8 -> Exit system");
+            System.out.println("--------------" + Data.getInstance().getText("menu", lang) + "------------");
+            System.out.println("1 -> " + Data.getInstance().getText("logout", lang));
+            System.out.println("2 -> " + Data.getInstance().getText("seeInfoStudents", lang));
+            System.out.println("3 -> " + Data.getInstance().getText("seeInfoTeachers", lang));
+            System.out.println("4 -> " + Data.getInstance().getText("assignCourseToTeacher", lang));
+            System.out.println("5 -> " + Data.getInstance().getText("assignCourseToStudent", lang));
+            System.out.println("6 -> " + Data.getInstance().getText("news", lang));
+            System.out.println("7 -> " + Data.getInstance().getText("viewRequests", lang));
+            System.out.println("8 -> " + Data.getInstance().getText("language", lang));
+            System.out.println("9 -> " + Data.getInstance().getText("exitSystem", lang));
+
             int n = Integer.parseInt(bf.readLine());
             switch (n){
                 case 1:
@@ -365,9 +384,18 @@ public class Authorization {
                     manager.viewInfoAboutTeachers();
                     break;
                 case 4:
-                    //manager.assignCourse();
+                    manager.approveRegistration();
                     break;
                 case 5:
+                    manager.addNews();
+                    break;
+                case 6:
+                    manager.scrollNews();
+                    break;
+                case 7:
+                    manager.viewRequests();
+                    break;
+                case 8:
                     exitSystem = false;
                     return;
             }
@@ -407,8 +435,8 @@ public class Authorization {
 
     private void changeLanguage() throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("--------------Language------------");
-        System.out.println("Current: " + lang.getText());
+        System.out.println("--------------" + Data.getInstance().getText("language", lang) + "------------");
+        System.out.println(Data.getInstance().getText("currentLanguage", lang) + lang.getText());
         System.out.println("1 -> Қазақша");
         System.out.println("2 -> Русский");
         System.out.println("3 -> English");
