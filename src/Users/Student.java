@@ -98,6 +98,14 @@ public class Student extends User implements Researcher, Serializable {
 		System.out.println(getTranscript().getOverallGpa());
 	}
 
+	/**
+	 * Allows the user to record attendance for a specific course and lesson type.
+	 * The user is prompted to enter the course name and then choose the lesson type (Lecture, Practice, or Laboratory).
+	 * Based on the chosen type, a new Lesson object is added to the corresponding lesson set in the user's journal.
+	 * The attendance status is set to ATTENDED for Practice and Laboratory lessons.
+	 *
+	 * @throws IOException If an I/O error occurs while reading input.
+	 */
 	public void putAttendance() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter course name: ");

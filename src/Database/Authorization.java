@@ -423,7 +423,7 @@ public class Authorization {
      * @throws IOException if an error occurs while reading input
      * @throws UserNotFound if the tech support specialist user is not found in the system
      */
-    private void runTechSupportSpecialist(){
+    private void runTechSupportSpecialist() throws UserNotFound, IOException{
         TechSupportSpecialist techSupportSpecialist = (TechSupportSpecialist) user;
     }
 
@@ -433,7 +433,7 @@ public class Authorization {
      * @throws IOException if an error occurs while reading input
      * @throws UserNotFound if the dean user is not found in the system
      */
-    private void runDean(){
+    private void runDean() throws UserNotFound, IOException{
         Dean dean = (Dean) user;
     }
 
@@ -443,7 +443,7 @@ public class Authorization {
      * @throws IOException if an error occurs while reading input
      * @throws UserNotFound if the rector user is not found in the system
      */
-    private void runRector(){
+    private void runRector() throws UserNotFound, IOException{
         Rector rector = (Rector) user;
     }
 

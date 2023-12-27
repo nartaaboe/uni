@@ -51,11 +51,6 @@ public class Dean extends Teacher implements Serializable {
 		return receivedComplaints;
 	}
 
-	/**
-	 * Views an employee request.
-	 *
-	 * @param request The request to be viewed.
-	 */
 	public void manageReceivedOrder(){
 		Order order = receivedComplaints.poll();
 		System.out.println("Order -> " + order + '\n' + " closed.");

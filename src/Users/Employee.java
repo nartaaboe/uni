@@ -97,9 +97,7 @@ public abstract class Employee extends User implements Serializable {
 
 	/**
 	 * Sends a request to a manager.
-	 *
-	 * @param manager     The manager to whom the request is being sent.
-	 * @param request     The request to be sent.
+	 * @return A Request
 	 */
 	private Request createRequest() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));

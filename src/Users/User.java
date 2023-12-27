@@ -38,40 +38,60 @@ public abstract class User implements Serializable {
 		this.username = username;
 
 	}
+	/**
+	 * Gets the type of user.
+	 *
+	 * @return The user type.
+	 */
 
 	public UserType getUserType() {
 		return userType;
 	}
 
+
+	/**
+	 * Gets the user's ID.
+	 *
+	 * @return The user's ID.
+	 */
+
+	/**
+	 * Gets the user's password.
+	 *
+	 * @return The user's password.
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Gets the user's password.
+	 *
+	 * @return The user's password.
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * Gets the user's username.
+	 *
+	 * @return The user's username.
+	 */
 	public String getUsername() {
 		return username;
 	}
 
+	/**
+	 * Abstract method to get the user's name.
+	 *
+	 * @return The user's name.
+	 */
 	public String getName() {
 		return "";
 	}
 
-	public void leaveCommentToNews() throws IOException {
-		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		List<News> news = Data.getInstance().getNews();
-		int j = 0;
-		for(int i = news.size() - 1; i >= 0; i--)
-			System.out.println((++j) + " -> " + news.get(i));
-		System.out.println("Choose news to comment: ");
-		int n = Integer.parseInt(bf.readLine());
-		System.out.println("Type your comment here: ");
-		String comment = bf.readLine();
-		Data.getInstance().getNews().get(n - 1).leaveComment(new Comment(this, new Date(), comment));
 
-	}
 
 	public void setUserType(UserType userType) {
 		this.userType = userType;
@@ -129,7 +149,12 @@ public abstract class User implements Serializable {
 		return false;
 	}
 
-
+	/**
+	 * Method to leave a comment on a news object.
+	 *
+	 * @param news The news object to leave a comment on.
+	 * @throws IOException If an I/O error occurs.
+	 */
 	private void leaveComment(News news) throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Type your comment here: ");
@@ -137,12 +162,19 @@ public abstract class User implements Serializable {
 		news.getComments().add(new Comment(this, new Date(), comment));
 	}
 
+	/**
+	 * Method to scroll through news articles, leave comments, and navigate.
+	 *
+	 * @throws IOException If an I/O error occurs.
+	 */
+
 	public void scrollNews() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		ListIterator<News> iterator = Data.getInstance().getNews().listIterator();
 		News news = iterator.next();
-		System.out.println(news);
+
 		while(true){
+			System.out.println(news);
 			System.out.println("1 -> Next");
 			System.out.println("2 -> Previous");
 			System.out.println("3 -> Leave comment");
@@ -185,7 +217,11 @@ public abstract class User implements Serializable {
 		}
 		return new HashSet<>();
 	}
-
+	/**
+	 * Saves the set of users to a file.
+	 *
+	 * @throws Exception If an error occurs during the saving process.
+	 */
 	public static void saveUsers() throws Exception {
 		FileOutputStream fos = new FileOutputStream("db/users.ser");
 		ObjectOutputStream oos = new ObjectOutputStream(fos);

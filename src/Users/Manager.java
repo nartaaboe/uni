@@ -159,10 +159,18 @@ public class Manager extends Employee implements Serializable {
 		return new News(title, new Date(), content, new HashSet<>());
 	}
 
+	/**
+	 *
+	 * @throws IOException
+	 */
 	public void addNews() throws IOException {
 		Data.getInstance().getNews().add(createNews());
 	}
 
+	/**
+	 *
+	 * @param news
+	 */
 	public void removeNews(News news) {
 		Iterator<News> iterator = Data.getInstance().getNews().iterator();
 		while (iterator.hasNext()) {
@@ -174,6 +182,10 @@ public class Manager extends Employee implements Serializable {
 		}
 	}
 
+	/**
+	 *
+	 * @throws IOException
+	 */
 	@Override
 	public void scrollNews() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
