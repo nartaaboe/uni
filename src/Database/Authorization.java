@@ -2,6 +2,7 @@ package Database;
 
 import Contents.Course;
 import Contents.Pair;
+import Enums.Language;
 import Enums.UserType;
 import Users.*;
 import Utils.CustomExceptions.CourseNotFound;
@@ -28,11 +29,17 @@ public class Authorization {
     private boolean exitSystem;
 
     /**
+     * The current language.
+     */
+    private Language lang;
+
+    /**
      * Constructs a new Authorization object.
      */
     public Authorization(){
 
         exitSystem = false;
+        lang = Language.EN;
     }
 
     /**
@@ -96,10 +103,11 @@ public class Authorization {
             if(!exitSystem)
                 return;
 
-            System.out.println("----Welcome to University System!----");
+            System.out.println("----" + Data.getInstance().getText("welcomeMessage", lang) + "----");
             System.out.println("choose one option!");
             System.out.println("1 -> Login.");
-            System.out.println("2 -> Exit System.");
+            System.out.println("2 -> Language.");
+            System.out.println("3 -> Exit System.");
             int n = Integer.parseInt(bf.readLine()); 
             if(n == 1){
                 login();
@@ -118,7 +126,11 @@ public class Authorization {
                 else if(user != null && user.getUserType() == UserType.DEAN)
                     runDean();
             }
-            else if(n == 2){
+            else if (n == 2){
+                changeLanguage();
+                viewMenu();
+            }
+            else if(n == 3){
                 exitSystem = false;
                 return;
             }
@@ -338,7 +350,6 @@ public class Authorization {
             System.out.println("3 -> See info about teachers");
             System.out.println("4 -> Assign course to teacher");
             System.out.println("5 -> Assign course to student");
-            System.out.println("");
             System.out.println("6 -> News");
             System.out.println("7 -> View requests");
             System.out.println("8 -> Exit system");
@@ -391,5 +402,30 @@ public class Authorization {
      */
     private void runRector(){
         Rector rector = (Rector) user;
+    }
+
+
+    private void changeLanguage() throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("--------------Language------------");
+        System.out.println("Current: " + lang.getText());
+        System.out.println("1 -> Қазақша");
+        System.out.println("2 -> Русский");
+        System.out.println("3 -> English");
+
+        int n = Integer.parseInt(bf.readLine());
+        switch (n){
+            case 1:
+                lang = Language.KZ;
+                break;
+            case 2:
+                lang = Language.RU;
+                break;
+            case 3:
+                lang = Language.EN;
+                break;
+
+        }
+
     }
 }

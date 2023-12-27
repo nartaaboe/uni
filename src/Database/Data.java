@@ -2,6 +2,7 @@ package Database ;
 
 import Contents.Course;
 import Contents.News;
+import Enums.Language;
 import Users.User;
 
 import java.io.*;
@@ -69,5 +70,21 @@ public class Data implements Serializable {
 		User.saveUsers();
 
     }
+
+	public String getText(String key, Language lang){
+		ResourceBundle bundle;
+		if (lang == Language.KZ){
+			bundle = ResourceBundle.getBundle("resourses/lang", new Locale("kz", "KZ"));
+		} else if (lang == Language.RU){
+			bundle = ResourceBundle.getBundle("resourses/lang", new Locale("ru", "RU"));
+		} else {
+			bundle = ResourceBundle.getBundle("resourses/lang", new Locale("en", "US"));
+		}
+
+		if (!bundle.containsKey(key)) return "";
+
+		return bundle.getString(key);
+
+	}
 
 }
