@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * An Admin class representing an administrator user with system-wide management capabilities.
@@ -52,14 +53,19 @@ public class Admin extends User implements Serializable {
 		String id = bf.readLine();
 		String password = bf.readLine();
 		String username = bf.readLine();
-		if(userType == UserType.ADMIN.toString().toLowerCase()){
+
+		if(Objects.equals(userType, UserType.ADMIN.toString().toLowerCase())){
 			Admin admin = new Admin(UserType.ADMIN, id, password, username);
 			Data.getInstance().addUser(admin);
-		} else if(userType == UserType.STUDENT.toString().toLowerCase()){
+		} else if(Objects.equals(userType, UserType.STUDENT.toString().toLowerCase())){
 			Student student = new Student(UserType.STUDENT, id, password, username);
 			Data.getInstance().addUser(student);
+		}  else if(Objects.equals(userType, UserType.TEACHER.toString().toLowerCase())){
+			Teacher teacher = new Teacher(UserType.TEACHER, id, password, username);
+			Data.getInstance().addUser(teacher);
 		}
-		
+
+		return;
 	}
 
 	/**

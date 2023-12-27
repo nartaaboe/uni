@@ -130,40 +130,50 @@ public abstract class User implements Serializable {
 	}
 
 
+	private void leaveComment(News news) throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Type your comment here: ");
+		String comment = bf.readLine();
+		news.getComments().add(new Comment(this, new Date(), comment));
+	}
+
 	public void scrollNews() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		ListIterator<News> iterator = Data.getInstance().getNews().listIterator();
-		System.out.println(iterator.next());
+		News news = iterator.next();
+		System.out.println(news);
 		while(true){
 			System.out.println("1 -> Next");
 			System.out.println("2 -> Previous");
-			System.out.println("3 -> Leave");
+			System.out.println("3 -> Leave comment");
+			System.out.println("4 -> Leave");
 			int n = Integer.parseInt(bf.readLine());
 			if(n == 1){
-				if(iterator.hasNext())
-					System.out.println(iterator.next());
-				else{
+				if(iterator.hasNext()){
+					news = iterator.next();
+					System.out.println(news);
+
+				} else{
 					System.out.println("No more news!");
 					break;
 				}
-			}
-			else if(n == 2){
+			} else if(n == 2){
 				if(iterator.hasPrevious()){
 					iterator.previous();
-					System.out.println(iterator.previous());
-				}
-				else {
+					news = iterator.previous();
+					System.out.println(news);
+				} else {
 					System.out.println("No more news!");
 					break;
 				}
-			}
-			else if(n == 3)
+			} else if(n == 3){
+				leaveComment(news);
+			} else if(n == 4)
 				break;
 			else
 				throw new IOException();
 		}
 	}
-
 	private static HashSet<User> loadUsers() {
 		File file = new File("db/users.ser");
 		if (file.exists()) {
@@ -183,6 +193,7 @@ public abstract class User implements Serializable {
 		fos.close();
 		oos.close();
 	}
+
 
 }
 

@@ -88,7 +88,7 @@ public class Comment implements Readable, Serializable {
 	 */
 	@Override
 	public String toString() {
-		return user.getUsername() + publicationDate + '\n' + comment;
+		return user.getUsername() + " " + publicationDate + ":\n" + comment;
 	}
 }
 

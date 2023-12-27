@@ -7,6 +7,7 @@ import Enums.UserType;
 import Users.*;
 import Utils.CustomExceptions.CourseNotFound;
 import Utils.CustomExceptions.UserNotFound;
+import Utils.Hashing.SHA256;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -55,7 +56,9 @@ public class Authorization {
         System.out.println(Data.getInstance().getText("enterPassword", lang));
         String password = bf.readLine();
         for (User u : Data.getInstance().getUsers()) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+
+            if (u.getUsername().equals(username) && u.getPassword().equals(SHA256.getHash(password))) {
+
                 System.out.println(Data.getInstance().getText("successfullyAuthorized", lang));
                 this.user = u;
                 return;
@@ -108,32 +111,34 @@ public class Authorization {
             System.out.println("1 -> " + Data.getInstance().getText("login", lang));
             System.out.println("2 -> " + Data.getInstance().getText("language", lang));
             System.out.println("3 -> " + Data.getInstance().getText("exitSystem", lang));
-            int n = Integer.parseInt(bf.readLine()); 
-            if(n == 1){
-                login();
-                if(user != null && user.getUserType() == UserType.ADMIN)
-                    runAdmin();
-                else if(user != null && user.getUserType() == UserType.STUDENT)
-                    runStudent();
-                else if(user != null && user.getUserType() == UserType.TEACHER)
-                    runTeacher();
-                else if(user != null && user.getUserType() == UserType.MANAGER)
-                    runManager();
-                else if(user != null && user.getUserType() == UserType.TECHSUPPORTSPECIALIST)
-                    runTechSupportSpecialist();
-                else if(user != null && user.getUserType() == UserType.RECTOR)
-                    runRector();
-                else if(user != null && user.getUserType() == UserType.DEAN)
-                    runDean();
+            int n = Integer.parseInt(bf.readLine());
+            switch (n){
+                case 1:
+                    login();
+                    if(user != null && user.getUserType() == UserType.ADMIN)
+                        runAdmin();
+                    else if(user != null && user.getUserType() == UserType.STUDENT)
+                        runStudent();
+                    else if(user != null && user.getUserType() == UserType.TEACHER)
+                        runTeacher();
+                    else if(user != null && user.getUserType() == UserType.MANAGER)
+                        runManager();
+                    else if(user != null && user.getUserType() == UserType.TECHSUPPORTSPECIALIST)
+                        runTechSupportSpecialist();
+                    else if(user != null && user.getUserType() == UserType.RECTOR)
+                        runRector();
+                    else if(user != null && user.getUserType() == UserType.DEAN)
+                        runDean();
+                    break;
+                case 2:
+                    changeLanguage();
+                    viewMenu();
+                    break;
+                case 3:
+                    exitSystem = false;
+                    return;
             }
-            else if (n == 2){
-                changeLanguage();
-                viewMenu();
-            }
-            else if(n == 3){
-                exitSystem = false;
-                return;
-            }
+
         }
 
 
@@ -166,12 +171,14 @@ public class Authorization {
                     return;
                 case 2:
                     student.viewJournal();
-                    while(true){
+                    boolean isTrue = true;
+                    while(isTrue){
                         System.out.println("--------------" + Data.getInstance().getText("journal", lang) + "------------");
                         System.out.println("1 -> " + Data.getInstance().getText("logout", lang));
                         System.out.println("2 -> " + Data.getInstance().getText("getOverallPoints", lang));
                         System.out.println("3 -> " + Data.getInstance().getText("getOverallAttendances", lang));
-                        System.out.println("4 -> " + Data.getInstance().getText("exitSystem", lang));
+                        System.out.println("4 -> " + Data.getInstance().getText("back", lang));
+                        System.out.println("5 -> " + Data.getInstance().getText("exitSystem", lang));
 
                         int m = Integer.parseInt(bf.readLine());
                         switch (m){
@@ -179,12 +186,15 @@ public class Authorization {
                                 logout();
                                 return;
                             case 2:
-                                student.getJournal().getAllPoints();
+                                System.out.println("Points: "+student.getJournal().getAllPoints());
                                 break;
                             case 3:
                                 student.getJournal().getAllAttendances();
                                 break;
                             case 4:
+                                isTrue = false;
+                                break;
+                            case 5:
                                 exitSystem = false;
                                 return;
                             default:
@@ -292,7 +302,8 @@ public class Authorization {
                     break;
                 case 3:
                     Pair pair = teacher.viewJournal();
-                    while(true){
+                    boolean isTrue = true;
+                    while(isTrue){
                         Student student = pair.getStudent();
                         Course course = pair.getCourse();
                         System.out.println("--------------" + Data.getInstance().getText("journal", lang) + "------------");
@@ -301,7 +312,8 @@ public class Authorization {
                         System.out.println("3 -> " + Data.getInstance().getText("changePoint", lang));
                         System.out.println("4 -> " + Data.getInstance().getText("putAttendance", lang));
                         System.out.println("5 -> " + Data.getInstance().getText("changeAttendance", lang));
-                        System.out.println("6 -> " + Data.getInstance().getText("exitSystem", lang));
+                        System.out.println("6 -> " + Data.getInstance().getText("back", lang));
+                        System.out.println("7 -> " + Data.getInstance().getText("exitSystem", lang));
 
                         int m = Integer.parseInt(bf.readLine());
                         switch (m) {
@@ -321,6 +333,9 @@ public class Authorization {
                                 teacher.changeAttendance(student, course);
                                 break;
                             case 6:
+                                isTrue = false;
+                                break;
+                            case 7:
                                 exitSystem = false;
                                 return;
                             default:

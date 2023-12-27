@@ -76,6 +76,22 @@ public class Teacher extends Employee implements Researcher, Serializable {
 	}
 
 	/**
+	 * Creates a new Teacher object with the specified details.
+	 *
+	 * @param userType the user type (always UserType.TEACHER)
+	 * @param id the teacher's unique ID
+	 * @param password the teacher's password
+	 * @param username the teacher's username
+
+	 */
+	public Teacher(UserType userType, String id, String password, String username) {
+		super(userType, id, password, username);
+		this.courseWithStudents = new HashMap<>();
+		this.rate = 0.0;
+
+	}
+
+	/**
 	 * Prints a list of students enrolled in each course taught by the teacher.
 	 */
 	public void viewStudents() {

@@ -153,14 +153,7 @@ public class News implements Serializable {
 		oos.close();
 	}
 
-	/**
-	 * Displays all comments associated with the news article to the console.
-	 */
-	public void viewComments(){
-		for(Comment c : comments){
-			System.out.println(c.read());
-		}
-	}
+
 
 	/**
 	 * Returns a string representation of the News object, including title, publication date, and content.
@@ -169,7 +162,18 @@ public class News implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return title + ", " + publicationDate + '\n' + content;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(title).append(", ").append(publicationDate).append('\n').append(content);
+
+		if (comments != null && !comments.isEmpty()) {
+			stringBuilder.append('\n').append("Comments: ");
+			for (Comment comment : comments){
+				stringBuilder.append('\n').append(comment.toString());
+			}
+
+		}
+
+		return stringBuilder.toString();
 	}
 }
 

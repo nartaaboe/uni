@@ -3,7 +3,9 @@ package Users ;
 
 import Contents.*;
 import Database.Data;
+import Enums.Attendance;
 import Enums.Faculty;
+import Enums.LessonType;
 import Enums.UserType;
 import Users.Researcher;
 
@@ -98,10 +100,24 @@ public class Student extends User implements Researcher, Serializable {
 
 	public void putAttendance() throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Enter course name: ");
 		String name = bf.readLine();
 		for(Map.Entry<Course, LinkedHashSet<Lesson>> entry : getJournal().getPoints().entrySet()){
 			if(entry.getKey().getName().equals(name)){
-
+				LinkedHashSet<Lesson> lst = entry.getValue();
+				System.out.println("Choose one: ");
+				System.out.println("1 -> Lecture");
+				System.out.println("2 -> Practice");
+				System.out.println("3 -> Laboratory");
+				int n = Integer.parseInt(bf.readLine());
+				if(n == 1)
+					lst.add(new Lesson());
+				else if(n == 2)
+					lst.add(new Lesson(LessonType.PRACTICE, Attendance.ATTENDED));
+				else if(n == 3)
+					lst.add(new Lesson(LessonType.LABORATORY, Attendance.ATTENDED));
+				getJournal().getPoints().put(entry.getKey(), lst);
+				break;
 			}
 		}
 	}

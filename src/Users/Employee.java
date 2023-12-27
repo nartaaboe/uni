@@ -55,6 +55,19 @@ public abstract class Employee extends User implements Serializable {
 	}
 
 	/**
+	 * Creates a new Employee object with the specified details.
+	 *
+	 * @param userType    The employee's user type.
+	 * @param id          The employee's ID.
+	 * @param password    The employee's password.
+	 * @param username    The employee's username.
+	 */
+	public Employee(UserType userType, String id, String password, String username) {
+		super(userType, id, password, username);
+		this.receivedMessages = new ArrayList<Message>();
+	}
+
+	/**
 	 * Returns the employee's salary.
 	 *
 	 * @return The employee's salary.
